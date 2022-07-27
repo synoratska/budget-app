@@ -19,8 +19,8 @@ body {
   font-weight: 400;
 }
 
-.right {
-  float: right;
+.budget__right {
+  display: flex;
 }
 
 .red {
@@ -206,4 +206,8 @@ i {
   display: flex;
   justify-content: space-between;
   width: 70px;
+}
+
+.budget__income--value, .budget__expenses--value {
+  margin-right: 20px;
 }
