@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+body {
+  color: #555;
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  position: relative;
+  height: 100vh;
+  font-weight: 400;
+}
+
+.right {
+  float: right;
+}
+
+.red {
+  color: #ff5049 !important;
+}
+
+.red-focus:focus {
+  border: 1px solid #ff5049 !important;
+}
+
+.top {
+  height: 40vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
+    url(https://images.unsplash.com/photo-1544377193-33dcf4d68fb5?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1032&q=80);
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.budget {
+  position: absolute;
+  width: 350px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #fff;
+}
+
+.budget__title {
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.budget__value {
+  font-weight: 300;
+  font-size: 35px;
+  text-align: center;
+  margin-bottom: 25px;
+  letter-spacing: 2px;
+}
+
+.budget__income,
+.budget__expenses {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 10px;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.budget__income {
+  background-color: #1ba31b;
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+.budget__expenses {
+  background-color: #9e2a2a;
+  opacity: 0.7;
+}
+
+.add__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.add__type {
+  margin-right: 10px;
+  padding: 16px;
+  border: none;
+  font-size: 16px;
+  font-weight: 300;
+  color: #555;
+  background-color: #fff;
+  cursor: pointer;
+  background-color: #efefef;
+}
+
+input.add__description,
+.add__value {
+  font-size: 16px;
+  color: #555;
+  padding: 1rem;
+  border: none;
+  background-color: #efefef;
+}
+
+.add__btn {
+  font-size: 25px;
+  padding: 10px 15px;
+  color: green;
+  border: none;
+}
+
+.container {
+  display: flex;
+  width: 80%;
+  margin: 50px auto;
+  justify-content: space-between;
+  background-color: #efefef;
+  padding: 20px;
+}
+
+.income__title,
+.expenses__title {
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: darkgreen;
+}
+
+.expenses__title {
+  color: #ff5049;
+}
+
+.item {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+
+.item__value {
+  color: #21c321;
+  font-weight: 600;
+}
+
+.item__value:hover {
+  visibility: visible;
+    cursor: pointer;
+}
+
+.item__value-even {
+  color: #ff5049;
+  font-weight: 600;
+}
+
+.item__delete {
+  font-size: 79px;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+
+
+
+.item__delete--btn {
+  border: none;
+}
+
+i {
+  width: 100%;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.ion-ios-close-outline {
+  color: #f1423c;
+}
+
+.item__percentage {
+  color: #870c0c;
+  padding: 2px;
+  background-color: #bb7c7c;
+  border-radius: 2px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 20px;
+}
+
+.num {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
