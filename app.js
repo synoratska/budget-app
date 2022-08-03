@@ -21,7 +21,7 @@ let budgetController = (function () {
     return this.percentage;
   };
 
-  let Income = function (id, description, value) {
+  const Income = function (id, description, value) {
     this.id = id;
     this.description = description;
     this.value = value;
@@ -212,14 +212,14 @@ let UIController = (function () {
     displayPercentages: function (percentages) {
       let fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-      let nodeListForEach = function (list, callback) {
+      let nodeListForEach = function(list, callback) {
         for (let i = 0; i < list.length; i++) {
           callback(list[i], i);
         }
       };
 
       nodeListForEach(fields, function (cur, index) {
-        if (percentages > 0) {
+        if (percentages[index] > 0) {
           cur.textContent = percentages[index] + "%";
         } else {
           cur.textContent = "---";
