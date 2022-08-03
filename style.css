@@ -100,7 +100,6 @@ body {
   font-size: 16px;
   font-weight: 300;
   color: #555;
-  background-color: #fff;
   cursor: pointer;
   background-color: #efefef;
 }
@@ -205,9 +204,13 @@ i {
 .num {
   display: flex;
   justify-content: space-between;
-  width: 70px;
+  width: 110px;
 }
 
 .budget__income--value, .budget__expenses--value {
   margin-right: 20px;
+}
+
+select {
+  padding: 20px
 }

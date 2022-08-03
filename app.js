@@ -145,6 +145,22 @@ let UIController = (function () {
     container: ".container",
     expensesPercLabel: ".item__percentage",
   };
+
+  let formatNumber = function (num, type) {
+    let numSplit, int, dec;
+    num = Math.abs(num);
+    num = num.toFixed(2);
+
+    numSplit = num.split(".");
+    int = numSplit[0];
+    if (int.length > 3) {
+      int = int.substr(0, int.length - 3) + "," + int.substr(int.length - 3, 3);
+    }
+
+    dec = numSplit[1];
+
+    return (type === "exp" ? "-" : "+") + "" + int + "." + dec;
+  };
   return {
     getInput: function () {
       return {
@@ -170,7 +186,7 @@ let UIController = (function () {
 
       newHtml = html.replace("%id%", obj.id);
       newHtml = newHtml.replace("%description%", obj.description);
-      newHtml = newHtml.replace("%value%", obj.value);
+      newHtml = newHtml.replace("%value%", formatNumber(obj.value, type));
 
       // Insert the HTML into the DOM
       document.querySelector(element).insertAdjacentHTML("beforeend", newHtml);
@@ -196,10 +212,18 @@ let UIController = (function () {
     },
 
     displayBudget: function (obj) {
-      document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
-      document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
+      let type;
+      obj.budget > 0 ? type ="inc" : type = "exp";
+      document.querySelector(DOMstrings.budgetLabel).textContent = formatNumber(
+        obj.budget,
+        type
+      );
+      document.querySelector(DOMstrings.incomeLabel).textContent = formatNumber(
+        obj.totalInc,
+        "inc"
+      );
       document.querySelector(DOMstrings.expensesLabel).textContent =
-        obj.totalExp;
+        formatNumber(obj.totalExp, "exp");
 
       if (obj.percentage > 0) {
         document.querySelector(DOMstrings.percentageLabel).textContent =
@@ -212,7 +236,7 @@ let UIController = (function () {
     displayPercentages: function (percentages) {
       let fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-      let nodeListForEach = function(list, callback) {
+      let nodeListForEach = function (list, callback) {
         for (let i = 0; i < list.length; i++) {
           callback(list[i], i);
         }
@@ -268,7 +292,7 @@ let controller = (function (budgetCtrl, UICtrl) {
     let percentages = budgetCtrl.getPercentages();
 
     // 3. update the UI with the new percentages
-    UICtrl.displayPercentages(percentages)
+    UICtrl.displayPercentages(percentages);
   };
 
   let ctrlAddItem = function () {
