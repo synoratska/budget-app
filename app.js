@@ -162,6 +162,13 @@ let UIController = (function () {
 
     return (type === "exp" ? "-" : "+") + "" + int + "." + dec;
   };
+
+  let nodeListForEach = function (list, callback) {
+    for (let i = 0; i < list.length; i++) {
+      callback(list[i], i);
+    }
+  };
+
   return {
     getInput: function () {
       return {
@@ -177,11 +184,11 @@ let UIController = (function () {
       if (type === "inc") {
         (element = DOMstrings.incomeContainer),
           (html =
-            '<div class="item" id="inc-%id%"><div class="item__description">%description%</div><div class="num"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>');
+            '<div class="item item-odd" id="inc-%id%"><div class="item__description">%description%</div><div class="num"><div class="item__value-odd">%value%</div><div class="item__delete item__delete--odd"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>');
       } else if (type === "exp") {
         (element = DOMstrings.expensesContainer),
           (html =
-            '<div class="item" id="exp-%id%"><div class="item__description">%description%</div><div class="num"><div class="item__value-even">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>');
+            '<div class="item item-even" id="exp-%id%"><div class="item__description">%description%</div><div class="num"><div class="item__value-even">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>');
       }
       // Replace the placeholder text with some actual data
 
@@ -237,12 +244,6 @@ let UIController = (function () {
     displayPercentages: function (percentages) {
       let fields = document.querySelectorAll(DOMstrings.expensesPercLabel);
 
-      let nodeListForEach = function (list, callback) {
-        for (let i = 0; i < list.length; i++) {
-          callback(list[i], i);
-        }
-      };
-
       nodeListForEach(fields, function (cur, index) {
         if (percentages[index] > 0) {
           cur.textContent = percentages[index] + "%";
@@ -256,10 +257,42 @@ let UIController = (function () {
       let now, year, month, months;
 
       now = new Date();
-      months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
+      ];
       month = now.getMonth();
       year = now.getFullYear();
-      document.querySelector(DOMstrings.dateLabel).textContent = months[month] + ' ' + year
+      document.querySelector(DOMstrings.dateLabel).textContent =
+        months[month] + " " + year;
+    },
+
+    changedType: function () {
+      let fields;
+
+      fields = document.querySelectorAll(
+        DOMstrings.inputType +
+          ", " +
+          DOMstrings.inputDescription +
+          ", " +
+          DOMstrings.inputValue
+      );
+
+      nodeListForEach(fields, function (cur) {
+        cur.classList.toggle("red-focus");
+      });
+
+      document.querySelector(DOMstrings.inputBtn).classList.toggle("red");
     },
 
     getDOMstrings: function () {
@@ -284,6 +317,10 @@ let controller = (function (budgetCtrl, UICtrl) {
     document
       .querySelector(DOM.container)
       .addEventListener("click", ctrlDeleteItem);
+
+    document
+      .querySelector(DOM.inputType)
+      .addEventListener("change", UICtrl.changedType);
   };
 
   let updateBudget = function () {
